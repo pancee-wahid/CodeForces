@@ -1,0 +1,38 @@
+import java.util.Arrays;
+import java.util.Scanner;
+ 
+public class Main {
+    public static String appeared = "";
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int testCases = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < testCases; i++) {
+            appeared = scanner.nextLine();
+            check();
+        }
+    }
+ 
+    public static void check(){
+        String output = "";
+        for (int i=0; i<appeared.length(); i++){
+            if ((i == appeared.length()-1) || (appeared.charAt(i) != appeared.charAt(i+1))) {
+                if (!output.contains(String.valueOf(appeared.charAt(i))))
+                    output += appeared.charAt(i);
+            }else if (appeared.charAt(i) == appeared.charAt(i+1)){
+                int counter = 1;
+                while((i<=appeared.length()-2) && (appeared.charAt(i) == appeared.charAt(i+1))){
+                    i++;
+                    counter++;
+                }
+                if (counter%2 != 0)
+                    if (!output.contains(String.valueOf(appeared.charAt(i))))
+                        output += appeared.charAt(i);
+            }
+        }
+        char[] workingButtons = output.toCharArray();
+        Arrays.sort(workingButtons);
+        System.out.println(workingButtons);
+        //workingButtons = null;
+    }
+}
