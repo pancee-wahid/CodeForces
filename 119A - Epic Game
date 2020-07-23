@@ -1,0 +1,59 @@
+import java.util.Scanner;
+ 
+public class EpicGame {
+ 
+    private static final Scanner scanner = new Scanner(System.in);
+    private static byte simon, antiSimon, heap;
+    private static byte lastMove=0;//as simon starts
+ 
+    public static void main(String[] args) {
+        String input = scanner.nextLine();
+        String[] inputs = input.split(" ");
+        simon = Byte.parseByte(inputs[0]);
+        antiSimon = Byte.parseByte(inputs[1]);
+        heap = Byte.parseByte(inputs[2]);
+        playGame();
+        System.out.println(lastMove);
+    }
+ 
+    public static void playGame(){
+         while(heap>0){
+            //Simon's turn
+            if (heap<gcd(simon, heap)) {
+                lastMove = 1;
+                break;
+            } else {
+                heap -= gcd(simon, heap);
+                lastMove = 0;
+            }
+            //AntiSimon's turn
+            if (heap<gcd(antiSimon, heap)) {
+                lastMove = 0;
+                break;
+            }else {
+                heap -= gcd(antiSimon, heap);
+                lastMove = 1;
+            }
+        }
+    }
+ 
+    public static byte gcd(byte first, byte second){
+        if (first<second)
+            return getGCD(first, second);
+        else if (second<first)
+            return getGCD(second, first);
+        else
+            return first;
+    }
+ 
+    public static byte getGCD(byte num1, byte num2){
+        byte divisor = num1;
+        while (divisor != 0){
+            if ((num1%divisor==0) && (num2%divisor==0))
+                return divisor;
+            divisor--;
+        }
+        divisor = 1;
+        return divisor;
+    }
+}
