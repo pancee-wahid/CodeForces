@@ -1,0 +1,25 @@
+import java.util.Scanner;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int A=0, D=0;
+        int games = scanner.nextInt();
+        scanner.nextLine();
+        String results = scanner.nextLine();
+        
+        for (int i=0; i<games; i++){
+            if (results.charAt(i) == 'A')
+                A++;
+            else 
+                D++;
+        }
+        
+        if (A < D)
+            System.out.println("Danik");
+        else if (A > D)
+            System.out.println("Anton");
+        else
+            System.out.println("Friendship");
+    }
+}
