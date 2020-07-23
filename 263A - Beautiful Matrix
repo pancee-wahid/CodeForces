@@ -1,0 +1,27 @@
+import java.util.Scanner;
+ 
+public class BeautifulMatrix {
+    //Declaring fields
+    private static Scanner scanner= new Scanner(System.in);
+    private static int[][] matrix = new int[5][5];
+ 
+    //Methods of the class
+    public static void main(String[] args) {
+        int row=0, col=0;
+        //Reading the matrix from the user
+        for (int i=1; i<=5; i++){
+            String matrixRow = scanner.nextLine();
+            String[] matrixRowArray = matrixRow.split(" ");
+            for (int j=1; j<=5; j++) {
+                matrix[i-1][j-1] = Integer.parseInt(matrixRowArray[j-1]);
+                if (matrix[i-1][j-1] == 1) {
+                    row = i;
+                    col = j;
+                }
+            }
+        }
+        int rowMoves = Math.abs((3-row)%5);
+        int colMoves = Math.abs((3-col)%5);
+        System.out.println(rowMoves+colMoves);
+    }
+}
