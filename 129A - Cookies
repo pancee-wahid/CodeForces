@@ -1,0 +1,44 @@
+import java.util.Scanner;
+ 
+public class Cookies {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numOfBags, numOfWays=0, sumOfCookies = 0;
+        numOfBags = scanner.nextInt();
+        scanner.nextLine();
+        
+        int[] numOfCookies = new int[numOfBags];
+        String inputs = scanner.nextLine();
+        String[] inputsArray = inputs.split(" ");
+        for (int i = 0; i < numOfBags; i++) {
+            numOfCookies[i] = Integer.parseInt(String.valueOf(inputsArray[i]));
+            sumOfCookies += numOfCookies[i];
+        }
+        
+        int[][] cookies_bags = new int[2][numOfBags];
+        int j, k, col = 0;
+        for (j = 0; j < numOfBags; j++) {
+            for (k = 0; k < j; k++) {
+                if (numOfCookies[j] == cookies_bags[0][k]) {
+                    cookies_bags[1][k]++;
+                    break;
+                }
+            }
+            if (k == j) {
+                cookies_bags[0][col] = numOfCookies[j];
+                cookies_bags[1][col] = 1;
+                col++;
+            }
+        }
+        
+        int remainingCookies = 0;
+        for (int i = 0; i < col ; i++) {
+            remainingCookies = sumOfCookies - cookies_bags[0][i];
+            if (remainingCookies % 2 == 0) {
+                numOfWays += cookies_bags[1][i];
+            }
+        }
+        
+        System.out.println(numOfWays);
+    }
+}
