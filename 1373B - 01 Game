@@ -1,0 +1,41 @@
+import java.util.Scanner;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //Inputs
+        int numOfCases = scanner.nextInt();
+        scanner.nextLine();
+        String[] testCases = new String[numOfCases];
+        for (int i=0; i<numOfCases; i++)
+            testCases[i] = scanner.nextLine();
+        //Checking if Alice could win
+        for (int i=0; i<numOfCases; i++)
+            check(testCases[i]);
+    }
+ 
+    public static void check(String testCase){
+        int totalMoves = 0;
+        int end = testCase.length()-1;
+        for (int i=0; i<end; i++) {
+            if (testCase.charAt(i) != testCase.charAt(i+1)){
+                if (i == 0)
+                    testCase = testCase.substring(i+2);
+                else
+                    testCase = testCase.substring(0,i) + testCase.substring(i+2);
+ 
+                totalMoves ++;
+                end -= 2;
+                i=-1;
+                if(testCase.length() == 0)
+                    break;
+            }
+        }
+ 
+        //Output
+        if (totalMoves == 0 || totalMoves%2 == 0)
+            System.out.println("NET");
+        else
+            System.out.println("DA");
+    }
+}
