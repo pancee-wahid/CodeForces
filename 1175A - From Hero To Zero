@@ -1,0 +1,25 @@
+import java.util.Scanner;
+ 
+public class Problem {
+    static final Scanner scanner = new Scanner(System.in);
+ 
+    public static void main(String[] args) {
+        int t = scanner.nextInt();
+        long n, k, steps;
+        for (int i = 0; i < t; i++) {
+            n = scanner.nextLong();
+            k = scanner.nextLong();
+            steps = 0;
+            while (n != 0) {
+                if (n % k == 0) {
+                    n /= k;
+                    steps++;
+                } else {
+                    steps += n % k;
+                    n -= n % k ;
+                }
+            }
+            System.out.println(steps);
+        }
+    }
+}
